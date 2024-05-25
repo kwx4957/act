@@ -61,7 +61,7 @@ jobs:
         with:
           host: "13.124.232.10"
           username: "ec2-user"
-          source: /
+          source: "./"
           key: ${{ secrets.PEM }}
           strip_components: 1
           target: "/home/ec2-user/"
