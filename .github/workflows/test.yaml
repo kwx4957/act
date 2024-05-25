@@ -1,0 +1,69 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: express CI & CD
+
+# 어떤 이벤트가 발생했을 때. 다음 작업들을 실행할 것인지.
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  # job 작업 단위
+  install:
+    # ubuntu 서버 환경 
+    runs-on: ubuntu-latest 
+
+    steps:
+    # github Actions plugins. 또 다른 플러그인은 해당 링크에서 참조하여 사용할 수 있다. https://github.com/marketplace
+    # github checkout plugins 및 Node 플러그인 사용
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    # npm install과 동일한 기능을 수행하지만 속도가 더 바르기에 ci 사용
+    - run: npm ci
+
+  test:
+    runs-on: ubuntu-latest
+    # needs는 작업의 작업 순서 방식을 의미한다. 동일한 서버 환경을 의미하지 않는다. test -> install -> build 순차적인 처리 순서를 의미한다.
+    needs: install 
+    steps:
+      - uses: actions/checkout@v4 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      #- run: npm test 
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test 
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      - run: npm run build --if-present
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build 
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - uses: appleboy/scp-action@master
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      - run: 
+    
+  debug: 
+    needs: [install, test, build, deploy]
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+    steps:
+      - run: echo "Faild to CI"
