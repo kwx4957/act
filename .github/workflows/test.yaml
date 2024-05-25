@@ -65,7 +65,7 @@ jobs:
           strip_components: 1
           target: "/home/ec2-user/"
   debug: 
-    needs: [install, test, build, deploy]
+    needs: [install, deploy]
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
