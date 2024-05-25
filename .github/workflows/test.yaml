@@ -59,8 +59,11 @@ jobs:
         with:
           node-version: '18.x'
           cache: 'npm'
-      - run: 
-    
+          host: "13.124.232.10"
+          username: "ec2-user"
+          key: ${{ secrets.PEM }}
+          strip_components: 1
+          target: "/home/ec2-user/"
   debug: 
     needs: [install, test, build, deploy]
     runs-on: ubuntu-latest
