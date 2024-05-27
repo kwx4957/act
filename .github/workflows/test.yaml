@@ -48,7 +48,7 @@ jobs:
           target: "/home/ec2-user/" # ${{ secrets.SERVER_DIR }}
 
   debug: 
-    needs: [install, deploy]
+    needs: [build, deploy]
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
