@@ -14,7 +14,8 @@ jobs:
   build:
     # ubuntu 서버 환경 
     runs-on: ubuntu-latest 
-
+    environment: 
+      name: dev
     steps:
     # github Actions plugins. 또 다른 플러그인은 해당 링크에서 참조하여 사용할 수 있다. https://github.com/marketplace
     # github checkout plugins 및 Node 플러그인 사용
@@ -26,5 +27,4 @@ jobs:
         
     - name: get dev env
       run: |
-        echo "${{ secrets.DEVELOPMENT_ENV }}" > ./.env
-        cat .env
+        echo "${{ secrets.DDDD }}" 
