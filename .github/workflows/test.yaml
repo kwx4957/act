@@ -23,7 +23,8 @@ jobs:
       with:
         node-version: '18.x'
         cache: 'npm'
+        
     - name: get dev env
       run: |
-      echo "${{ secrets.DEVELOPMENT_ENV }}" > ./.env
-      cat .env
+        echo "${{ secrets.DEVELOPMENT_ENV }}" > ./.env
+        cat .env
