@@ -11,8 +11,7 @@ jobs:
     environment: 
       name: development
       url: https://github.com/kwx4957/act
- 
-  	steps:
+    steps:
       - uses: actions/checkout@v4
       - uses: appleboy/ssh-action@master
         with:
@@ -21,5 +20,5 @@ jobs:
           source: "./"   
           key: ${{ secrets.PEM }} 
           strip_components: 1
-		  run: |
-		    touch 1 
+	      script: |
+	          touch a
