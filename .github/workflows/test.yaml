@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: tset
-      url: https://github.com/
+      url: https://github.com/kwx4957/kwx4957
     steps:
       - uses: actions/checkout@v4
       - uses: appleboy/ssh-action@master
