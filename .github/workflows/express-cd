@@ -1,4 +1,4 @@
-name: CD Pipeline
+name: Express CD Pipeline
 
 on:
   push:
@@ -8,15 +8,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     environment: 
 	    name: development	
+
 	  defaults:
       run: 
         working-directory: ./test/
         
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -24,7 +26,7 @@ jobs:
           name: build-artifacts
 
       - name: Deploy to Dev
-		uses: appleboy/ssh-action@master
+		    uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.USER }} 
