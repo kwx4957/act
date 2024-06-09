@@ -20,5 +20,4 @@ jobs:
           source: "./"   
           key: ${{ secrets.PEM }} 
           strip_components: 1
-	      script: |
-	          touch a
+          script: touch a
