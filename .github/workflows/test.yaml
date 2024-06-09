@@ -8,11 +8,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-	  environment: 
-	    name: development
+    environment: 
+      name: development
       url: https://github.com/kwx4957/act
  
-	steps:
+  	steps:
       - uses: actions/checkout@v4
       - uses: appleboy/ssh-action@master
         with:
