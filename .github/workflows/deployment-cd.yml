@@ -10,31 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     environment: 
-	    name: development	
+      name: development
 
-	  defaults:
+    defaults:
       run: 
         working-directory: ./test/
-        
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-aritifact@v4
         with:
           name: build-artifacts
 
-      - name: Deploy to Dev
-		    uses: appleboy/ssh-action@master
+      - name: Deploy to development Server
+        uses: actions/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.USER }} 
-          password: ${{ secrets.PASSWORD }} 
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
           script: |
-	          git pull 
+            git pull
             cd ${{ secrets.SERVER_DIR }}/test
             npm ci
             npm run build --if-present
-			    # npm test
+            # npm test
             pm2 restart ecosystem.config.js
