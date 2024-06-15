@@ -30,13 +30,13 @@ jobs:
           username: "ec2-user"
           key: ${{ secrets.PASSWORD }}
           script: |
-            cat hello.txt
+            cat hello.txt || 1
             ls -al
 
   debug:
     needs: [build]
     runs-on: ubuntu-latest
 
-    if: ${{ failure() }}
+    if: failure()
     steps:
       - run: echo "Faild to CI"
