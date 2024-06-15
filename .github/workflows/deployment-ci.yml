@@ -30,7 +30,7 @@ jobs:
           username: "ec2-user"
           key: ${{ secrets.PASSWORD }}
           script: |
-            cat hello.txt || 1
+            cat hello.txt || exit 1
             ls -al
 
   debug:
