@@ -33,3 +33,10 @@ jobs:
             cat hello.txt
             ls -al
 
+  debug:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    if: ${{ failure() }}
+    steps:
+      - run: echo "Faild to CI"
