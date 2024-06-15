@@ -26,7 +26,7 @@ jobs:
       - name: Deploy to development Server
         uses: appleboy/ssh-action@master
         with:
-          host: http://3.38.116.144
+          host: 3.38.116.144
           username: "ec2-user"
           key: ${{ secrets.PASSWORD }}
           script: |
