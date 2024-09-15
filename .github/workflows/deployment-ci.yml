@@ -16,4 +16,4 @@ jobs:
       - name: Install dependencies, build and test
         run: | 
           curl -Os https://raw.githubusercontent.com/awslabs/amazon-documentdb-tools/master/compat-tool/compat.py
-          python3 compat.py --version 5.0 --directory graphql/server
+          python3 compat.py --version 5.0 --directory .
